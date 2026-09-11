@@ -1,201 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOCKADOMAS | Under Active Development</title>
-    <style>
-        :root {
-            --brand-green: #00FF88;
-            --bg-dark: #0a0c0e;
-            --card-bg: #12161a;
-            --border-color: #1e262c;
-            --text-light: #e0e6ed;
-            --text-dim: #8a99a8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOCKADOMAS</title>
+<meta name="description" content="LOCKADOMAS is quietly building a proprietary, fully on-device AI architecture for real-time athletic performance analysis. No cloud. No compromises.">
+<meta property="og:title" content="LOCKADOMAS">
+<meta property="og:description" content="Advanced engineering meets performance. A proprietary on-device AI architecture, built in the open, revealed in full soon.">
+<meta property="og:image" content="logo.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/jpeg" href="logo.jpg">
+<style>
+  :root{
+    --bg:#0a0b0d;
+    --bg-panel:#131519;
+    --border:#22262c;
+    --text:#eef0f2;
+    --text-dim:#9aa1ab;
+    --accent:#3ddc84;
+    --accent-dim:#1f7a4a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5;
+    padding:0 20px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-block:28px;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand img{width:36px;height:36px;border-radius:8px;display:block;}
+  .brand span{font-weight:700;letter-spacing:0.08em;font-size:15px;}
+  .social{display:flex;gap:16px;}
+  .social a{
+    color:var(--text-dim);
+    text-decoration:none;
+    font-size:13px;
+    border:1px solid var(--border);
+    padding:6px 12px;
+    border-radius:100px;
+    transition:color 0.15s,border-color 0.15s;
+  }
+  .social a:hover{color:var(--text);border-color:var(--accent-dim);}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+  .status{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--text-dim);
+    border:1px solid var(--border);
+    padding:6px 14px;
+    border-radius:100px;
+    margin-bottom:28px;
+  }
+  .status .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 0 rgba(61,220,132,0.6);
+    animation:pulse 2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(61,220,132,0.5);}
+    70%{box-shadow:0 0 0 8px rgba(61,220,132,0);}
+    100%{box-shadow:0 0 0 0 rgba(61,220,132,0);}
+  }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem 1rem;
-        }
+  h1{
+    font-size:clamp(34px,6vw,56px);
+    line-height:1.05;
+    margin:0 0 18px 0;
+    letter-spacing:-0.02em;
+  }
+  .tagline{
+    font-size:18px;
+    color:var(--text-dim);
+    max-width:640px;
+    margin:0 0 44px 0;
+  }
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-bottom:56px;
+  }
+  @media (max-width:700px){ .cards{grid-template-columns:1fr;} }
+  .card{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px;
+  }
+  .card .stat{
+    font-size:22px;
+    font-weight:700;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .card p{
+    font-size:14px;
+    color:var(--text-dim);
+    margin:0;
+  }
 
-        .badge {
-            display: inline-block;
-            border: 1px solid var(--brand-green);
-            color: var(--brand-green);
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.15);
-        }
+  .flow{
+    display:grid;
+    grid-template-columns:1fr auto 1fr auto 1fr;
+    align-items:center;
+    gap:10px;
+    margin-bottom:56px;
+  }
+  @media (max-width:700px){
+    .flow{grid-template-columns:1fr;}
+    .flow .arrow{display:none;}
+  }
+  .flow .step{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    text-align:center;
+  }
+  .flow .step .n{
+    font-size:12px;
+    color:var(--accent);
+    letter-spacing:0.1em;
+    margin-bottom:6px;
+  }
+  .flow .step .t{
+    font-weight:700;
+    font-size:16px;
+  }
+  .flow .arrow{color:var(--border);font-size:20px;}
 
-        .logo-wrapper {
-            margin: 0 auto 2rem auto;
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(135deg, var(--brand-green), transparent);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
-        }
+  section.waitlist{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:36px 28px;
+    text-align:center;
+    margin-bottom:56px;
+  }
+  section.waitlist h2{
+    margin:0 0 8px 0;
+    font-size:24px;
+  }
+  section.waitlist p{
+    color:var(--text-dim);
+    margin:0 0 24px 0;
+    font-size:14px;
+  }
+  form{
+    display:flex;
+    gap:10px;
+    max-width:420px;
+    margin:0 auto;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  form input[type="email"]{
+    flex:1;
+    min-width:220px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:100px;
+    padding:12px 18px;
+    color:var(--text);
+    font-size:14px;
+  }
+  form input[type="email"]:focus{outline:none;border-color:var(--accent-dim);}
+  form button{
+    background:var(--accent);
+    color:#04120a;
+    border:none;
+    border-radius:100px;
+    padding:12px 24px;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+  }
+  form button:hover{background:#5ee69c;}
+  .form-note{font-size:12px;color:var(--text-dim);margin-top:14px;}
+  .form-msg{font-size:13px;margin-top:14px;display:none;}
+  .form-msg.ok{color:var(--accent);}
+  .form-msg.err{color:#ff6b6b;}
+  /* honeypot */
+  .hp{position:absolute;left:-9999px;opacity:0;}
 
-        .logo-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            background-color: #000;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
-        }
-
-        h1 span {
-            color: var(--brand-green);
-        }
-
-        p.hero-text {
-            color: var(--text-dim);
-            font-size: 1.15rem;
-            line-height: 1.6;
-            margin-bottom: 3rem;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .feature-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: left;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--brand-green);
-        }
-
-        .feature-card h3 {
-            color: var(--brand-green);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-card p {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .cta-box {
-            background: linear-gradient(180deg, var(--card-bg) 0%, rgba(18, 22, 26, 0.5) 100%);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .cta-box p {
-            font-size: 0.95rem;
-            color: var(--text-dim);
-            margin-bottom: 1rem;
-        }
-
-        .contact-link {
-            color: var(--brand-green);
-            text-decoration: none;
-            font-weight: 600;
-            word-break: break-all;
-        }
-
-        .contact-link:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            margin-top: 4rem;
-            color: var(--text-dim);
-            font-size: 0.8rem;
-        }
-    </style>
+  footer{
+    border-top:1px solid var(--border);
+    padding:28px 0 40px 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    color:var(--text-dim);
+    font-size:13px;
+  }
+  footer .social a{font-size:13px;}
+</style>
 </head>
 <body>
+<div class="wrap">
 
-    <div class="container">
-        <div class="badge">In Active Development</div>
-        
-        <div class="logo-wrapper">
-            <!-- Save your image as logo.jpg in your GitHub repo root -->
-            <img src="logo.jpg" alt="LOCKADOMAS Logo">
-        </div>
-
-        <h1>LOCKADOMAS</h1>
-        <p class="hero-text">
-            Advanced engineering meets performance. We are quietly building a proprietary architecture designed to transform athletic performance—without compromising data privacy or real-time speed.
-        </p>
-
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>5 Custom AI Models</h3>
-                <p>Multi-model neural pipelines operating in sync for precision analytics.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Zero-Cloud Inference</h3>
-                <p>100% edge computing. Ultra-low latency processing with complete data privacy.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Zero Gimmicks</h3>
-                <p>No unnecessary hardware bloat. Pure algorithm-driven performance optimization.</p>
-            </div>
-        </div>
-
-        <div class="cta-box">
-            <p>Direct inquiries, partnership requests, or investor communications:</p>
-            <a href="mailto:joseph@lockadomas.com" class="contact-link">joseph@lockadomas.com</a>
-        </div>
-
-        <footer>
-            &copy; 2026 LOCKADOMAS, LLC. All rights reserved.
-        </footer>
+  <header>
+    <div class="brand">
+      <img src="logo.jpg" alt="LOCKADOMAS logo">
+      <span>LOCKADOMAS</span>
     </div>
+    <div class="social">
+      <a href="https://x.com/lockadomas" target="_blank" rel="noopener">X</a>
+      <a href="https://www.facebook.com/profile.php?id=61594474821112" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </header>
+
+  <div class="status"><span class="dot"></span> Actively field-testing on real hardware, right now</div>
+
+  <h1>Advanced engineering meets performance.</h1>
+  <p class="tagline">We are quietly building a proprietary architecture designed to transform athletic performance — without compromising data privacy or real-time speed.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="stat">5 Models, 1 Pipeline</div>
+      <p>Multiple purpose-built neural networks, synchronized in real time on a single device — not stitched together after the fact.</p>
+    </div>
+    <div class="card">
+      <div class="stat">Zero-Cloud Inference</div>
+      <p>100% on-device processing. Your footage never leaves your hardware — no upload, no server round-trip, no exceptions.</p>
+    </div>
+    <div class="card">
+      <div class="stat">Built for the NPU</div>
+      <p>Engineered from the ground up for on-chip neural acceleration — not adapted from something that was built for the cloud.</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="step"><div class="n">STEP 1</div><div class="t">Capture</div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><div class="n">STEP 2</div><div class="t">Analyze</div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="step"><div class="n">STEP 3</div><div class="t">Instant Feedback</div></div>
+  </div>
+
+  <section class="waitlist">
+    <h2>Get early access</h2>
+    <p>We're not ready to show you everything yet. Be first in line when we are.</p>
+    <form action="https://formspree.io/f/xzebojqb" method="POST" id="waitlistForm">
+      <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+      <input type="email" name="email" placeholder="you@email.com" required>
+      <button type="submit">Notify me</button>
+    </form>
+    <div class="form-note">No spam. Just the announcement, when it happens.</div>
+    <div class="form-msg" id="formMsg"></div>
+  </section>
+
+  <footer>
+    <div>&copy; 2026 LOCKADOMAS, LLC. All rights reserved.</div>
+    <div class="social">
+      <a href="https://x.com/lockadomas" target="_blank" rel="noopener">X</a>
+      <a href="https://www.facebook.com/profile.php?id=61594474821112" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Progressive enhancement: submit via fetch so the visitor gets an inline
+  // "you're on the list" message instead of being bounced to Formspree's
+  // own confirmation page. Falls back to a normal form POST if fetch fails
+  // for any reason (still works, just leaves the page).
+  const form = document.getElementById('waitlistForm');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      if (res.ok) {
+        msg.textContent = "You're on the list. We'll be in touch.";
+        msg.className = 'form-msg ok';
+        form.reset();
+      } else {
+        msg.textContent = 'Something went wrong — try again in a moment.';
+        msg.className = 'form-msg err';
+      }
+      msg.style.display = 'block';
+    }).catch(function(){
+      form.submit();
+    });
+  });
+</script>
 
 </body>
 </html>
