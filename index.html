@@ -158,36 +158,68 @@
   }
   form{
     display:flex;
-    gap:10px;
-    max-width:420px;
+    flex-direction:column;
+    gap:14px;
+    max-width:440px;
     margin:0 auto;
-    flex-wrap:wrap;
-    justify-content:center;
+    text-align:left;
   }
-  form input[type="email"]{
-    flex:1;
-    min-width:220px;
+  .form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .form-group label{
+    font-size:13px;
+    font-weight:600;
+    color:var(--text);
+  }
+  form input[type="text"],
+  form input[type="email"],
+  form select{
+    width:100%;
     background:var(--bg);
     border:1px solid var(--border);
     border-radius:100px;
     padding:12px 18px;
     color:var(--text);
     font-size:14px;
+    font-family:inherit;
+    box-sizing:border-box;
+    appearance:none;
+    -webkit-appearance:none;
   }
-  form input[type="email"]:focus{outline:none;border-color:var(--accent-dim);}
+  form select{
+    background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa1ab' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat:no-repeat;
+    background-position:right 18px center;
+    background-size:16px;
+    padding-right:42px;
+  }
+  form select option{
+    background:var(--bg-panel);
+    color:var(--text);
+  }
+  form input:focus,
+  form select:focus{
+    outline:none;
+    border-color:var(--accent-dim);
+  }
   form button{
     background:var(--accent);
     color:#04120a;
     border:none;
     border-radius:100px;
-    padding:12px 24px;
+    padding:14px 24px;
     font-weight:700;
     font-size:14px;
     cursor:pointer;
+    margin-top:6px;
+    transition:background 0.15s;
   }
   form button:hover{background:#5ee69c;}
-  .form-note{font-size:12px;color:var(--text-dim);margin-top:14px;}
-  .form-msg{font-size:13px;margin-top:14px;display:none;}
+  .form-note{font-size:12px;color:var(--text-dim);margin-top:14px;text-align:center;}
+  .form-msg{font-size:13px;margin-top:14px;display:none;text-align:center;}
   .form-msg.ok{color:var(--accent);}
   .form-msg.err{color:#ff6b6b;}
   /* honeypot */
@@ -254,11 +286,36 @@
   <section class="waitlist">
     <h2>Get early access</h2>
     <p>We're not ready to show you everything yet. Be first in line when we are.</p>
+    
     <form action="https://formspree.io/f/xzebojqb" method="POST" id="waitlistForm">
       <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
-      <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required>
+
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="Name" placeholder="First and Last Name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="handicap">Golf Handicap Range</label>
+        <select id="handicap" name="Handicap Range" required>
+          <option value="" disabled selected>Select handicap range...</option>
+          <option value="Scratch or lower">Scratch or lower</option>
+          <option value="0 - 5">0 - 5</option>
+          <option value="6 - 10">6 - 10</option>
+          <option value="11 - 15">11 - 15</option>
+          <option value="16+">16+</option>
+          <option value="Not a golfer / Other">Not a golfer / Other</option>
+        </select>
+      </div>
+
       <button type="submit">Notify me</button>
     </form>
+
     <div class="form-note">No spam. Just the announcement, when it happens.</div>
     <div class="form-msg" id="formMsg"></div>
   </section>
