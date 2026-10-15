@@ -313,6 +313,23 @@
         </select>
       </div>
 
+      <div class="form-group">
+        <label for="referral">How did you hear about us?</label>
+        <select id="referral" name="Referral Source">
+          <option value="" disabled selected>Select...</option>
+          <option value="X">X</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Instagram">Instagram</option>
+          <option value="TikTok">TikTok</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="otherReferralGroup" style="display:none;">
+        <label for="otherReferral">Please tell us how you heard about us</label>
+        <input type="text" id="otherReferral" name="Other Referral" placeholder="Tell us more...">
+      </div>
+
       <button type="submit">Notify me</button>
     </form>
 
@@ -336,6 +353,11 @@
 <script>
   const form = document.getElementById('waitlistForm');
   const msg = document.getElementById('formMsg');
+  const referralSelect = document.getElementById('referral');
+  const otherReferralGroup = document.getElementById('otherReferralGroup');
+  referralSelect.addEventListener('change', function(){
+    otherReferralGroup.style.display = (referralSelect.value === 'Other') ? '' : 'none';
+  });
   form.addEventListener('submit', function(e){
     e.preventDefault();
     const data = new FormData(form);
